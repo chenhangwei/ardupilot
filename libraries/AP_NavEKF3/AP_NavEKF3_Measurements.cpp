@@ -637,11 +637,16 @@ void NavEKF3_core::readGpsData()
     }
 
     // check if we have enough GPS satellites and increase the gps noise scaler if we don't
-    if (gps.num_sats(selected_gps) >= 6 && (PV_AidingMode == AID_ABSOLUTE)) {
+    // if (gps.num_sats(selected_gps) >= 6 && (PV_AidingMode == AID_ABSOLUTE)) {
+    //     gpsNoiseScaler = 1.0f;
+    // } else if (gps.num_sats(selected_gps) == 5 && (PV_AidingMode == AID_ABSOLUTE)) {
+    //     gpsNoiseScaler = 1.4f;
+    // } else { // <= 4 satellites or in constant position mode
+    //     gpsNoiseScaler = 2.0f;
+    // }
+     if (gps.num_sats(selected_gps) >= 4&& (PV_AidingMode == AID_ABSOLUTE)) {
         gpsNoiseScaler = 1.0f;
-    } else if (gps.num_sats(selected_gps) == 5 && (PV_AidingMode == AID_ABSOLUTE)) {
-        gpsNoiseScaler = 1.4f;
-    } else { // <= 4 satellites or in constant position mode
+    }else { // <= 4 satellites or in constant position mode
         gpsNoiseScaler = 2.0f;
     }
 
