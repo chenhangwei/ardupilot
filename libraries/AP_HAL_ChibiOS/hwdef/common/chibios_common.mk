@@ -133,6 +133,8 @@ LDFLAGS   = $(MCFLAGS) $(OPT) -nostartfiles $(LLIBDIR) -Wl,-Map=$(BUILDDIR)/$(PR
 
 # provide a marker for ArduPilot build options in ChibiOS
 CFLAGS    += -D_ARDUPILOT_
+# Disable address warning that causes build failure in ChibiOS MACv2
+CFLAGS    += -Wno-error=address
 
 ifeq ($(ENABLE_ASSERTS),yes)
   ASXFLAGS += -DHAL_CHIBIOS_ENABLE_ASSERTS
